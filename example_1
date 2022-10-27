@@ -1,0 +1,60 @@
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		PrintTriangleTest.run();				
+	}
+}
+
+class PrintTriangleTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("Bir sayı giriniz:");
+			int val = kb.nextInt();
+			
+			if (val <= 0)
+				return;
+			
+			NumberUtil.printTriangle(val);
+		}
+	}
+}
+
+class NumberUtil {	
+	public static void printTriangle(int val)
+	{
+		for (int i = 1; i <= val; ++i)
+			printLine(val, i);
+		
+		for (int i = val - 1; i >= 1; --i)
+			printReverseLine(i, val);
+		
+	}
+	public static void printLine(int val, int step)
+	{
+		for (int i = 0; i < val - step; ++i)
+			System.out.print(' ');
+		
+		for (int i = 0; i < step * 2 - 1; ++i)
+			System.out.print('*');
+		
+		System.out.println();
+	}
+	public static void printReverseLine(int val, int total)
+	{
+		for (int i = val; i < total; ++i)
+			System.out.print(' ');
+		
+		for (int i = 0; i < val * 2 - 1; ++i)
+			System.out.print('*');
+		
+		System.out.println();
+	}
+}
+
+
+
