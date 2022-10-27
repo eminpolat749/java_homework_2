@@ -1,0 +1,63 @@
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		GoldbachTest.run();				
+	}
+}
+
+class GoldbachTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		for (;;) {
+			System.out.print("2'den büyük bir çift sayı giriniz:");
+			int val = kb.nextInt();
+			
+			if (val <= 2 && val % 2 != 0)
+				return;
+			
+			NumberUtil.goldBach(val);
+		}
+	}
+}
+
+class NumberUtil {	
+	public static void goldBach(int val)
+	{
+		int temp = val;
+		val /= 2;
+		
+		while (!isPrime(val)) {
+			++val;
+		}
+		
+		System.out.printf("%d + %d = %d%n", val, temp - val, temp);
+		
+	}
+	public static boolean isPrime(long val)
+	{
+		if (val <= 1)
+			return false;
+		
+		if (val % 2 == 0)
+			return val == 2;
+		
+		if (val % 3 == 0)
+			return val == 3;
+		
+		if (val % 5 == 0)
+			return val == 5;
+		
+		if (val % 7 == 0)
+			return val == 7;
+		
+		for (int i = 11; i * i <= val; i += 2)
+			if (val % i == 0)
+				return false;
+		
+		return true;
+	}
+}
