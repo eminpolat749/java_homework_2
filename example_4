@@ -1,0 +1,56 @@
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		PrintBallTest.run();				
+	}
+}
+
+class PrintBallTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		
+		System.out.print("Yükseklik giriniz:");
+		int height = kb.nextInt();
+		
+		System.out.print("Genişlik giriniz:");
+		int weight = kb.nextInt();
+		
+		NumberUtil.printBall(height, weight);		
+	}
+}
+
+class NumberUtil {
+	public static void printBall(int height, int width)
+	{
+		int j = 0;
+		boolean flag = true;
+		for (int i = 0; i < height; ++i) {			
+			printLine(width, j);
+			System.out.println();
+			if (flag == true)
+				++j;
+			if (j == width)
+				flag = false;
+			if (flag == false)
+				--j;
+			if (j == 0)
+				flag = true; 
+		}
+	}
+	
+	public static void printLine(int width, int ball)
+	{
+		System.out.print('|');
+		for (int i = 0; i < width; ++i) {
+			if (ball == i) {
+				System.out.print('*');
+			continue;	
+			}					
+			System.out.print(' ');		
+		}		
+		System.out.print('|');		
+	}
+}
