@@ -1,0 +1,37 @@
+package csd;
+
+class App {
+	public static void main(String [] args)
+	{
+		PrintDurationTest.run();		
+	}
+}
+
+class PrintDurationTest {
+	public static void run()
+	{
+		java.util.Scanner kb = new java.util.Scanner(System.in);
+		System.out.print("Bir değer giriniz:");
+		int val = kb.nextInt();		
+		
+		Util.printDuration(val);		
+	}
+}
+
+class Util {
+	public static void printDuration(long seconds)
+	{		
+		long hour = seconds / 3600;
+		long second = seconds % 60;
+		long minutes = seconds % 3600 / 60;
+		
+		if (hour != 0)
+			System.out.printf("Saat:%d%n", hour);
+		
+		if (minutes != 0)
+			System.out.printf("Dakika:%d%n", minutes);
+		
+		if (second != 0)
+			System.out.printf("Saniye:%d%n", second);			
+	}	
+}
