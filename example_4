@@ -3,54 +3,74 @@ package csd;
 class App {
 	public static void main(String [] args)
 	{
-		PrintBallTest.run();				
+		BallFallApp.run();
 	}
 }
 
-class PrintBallTest {
+class BallFallApp {
 	public static void run()
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
 		
-		System.out.print("Yükseklik giriniz:");
-		int height = kb.nextInt();
-		
-		System.out.print("Genişlik giriniz:");
-		int weight = kb.nextInt();
-		
-		NumberUtil.printBall(height, weight);		
-	}
-}
-
-class NumberUtil {
-	public static void printBall(int height, int width)
-	{
-		int j = 0;
-		boolean flag = true;
-		for (int i = 0; i < height; ++i) {			
-			printLine(width, j);
-			System.out.println();
-			if (flag == true)
-				++j;
-			if (j == width)
-				flag = false;
-			if (flag == false)
-				--j;
-			if (j == 0)
-				flag = true; 
-		}
+		for (;;) {
+			System.out.print("Input width and height:");
+			int width = kb.nextInt();
+			int height = kb.nextInt();
+			
+			if (width == 0)
+				break;
+			
+			BallFall.play(width, height);
+		}		
 	}
 	
-	public static void printLine(int width, int ball)
+}
+
+class BallFall {
+	public static void fillSpace(int begin, int end)
 	{
-		System.out.print('|');
-		for (int i = 0; i < width; ++i) {
-			if (ball == i) {
-				System.out.print('*');
-			continue;	
-			}					
-			System.out.print(' ');		
-		}		
-		System.out.print('|');		
+		for (int i = begin; i < end; ++i)
+			System.out.print(' ');
+	}
+	
+	public static void fillBall(int ballIndex, int end)
+	{
+		fillSpace(0, ballIndex);
+		System.out.print('*');
+		fillSpace(ballIndex + 1, end);
+	}
+	
+	public static boolean updateRightFlag(boolean isRight, int ballIndex, int width)
+	{
+		if (ballIndex == 0)
+			isRight = true;
+		else if (ballIndex == width - 1)
+			isRight = false;
+		
+		return isRight;
+	}
+	
+	public static int updateBallIndex(boolean isRight, int ballIndex)
+	{
+		if (isRight)
+			return ballIndex + 1;
+		
+		return ballIndex - 1;
+	}
+	
+	public static void play(int width, int height)
+	{
+		int ballIndex = 0;
+		boolean isRight = false;
+		
+		for (int i = 1; i <= height; ++i) {
+			System.out.print('|');
+			fillBall(ballIndex, width);
+			if (width != 1) {
+				isRight = updateRightFlag(isRight, ballIndex, width);
+				ballIndex = updateBallIndex(isRight, ballIndex);
+			}
+			System.out.println('|');
+		}
 	}
 }
