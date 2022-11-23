@@ -3,7 +3,7 @@ package csd;
 class App {
 	public static void main(String [] args)
 	{
-		PrintDurationTest.run();		
+		PrintDurationTest.run();
 	}
 }
 
@@ -11,27 +11,37 @@ class PrintDurationTest {
 	public static void run()
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
-		System.out.print("Bir değer giriniz:");
-		int val = kb.nextInt();		
 		
-		Util.printDuration(val);		
+		for (;;) {
+			System.out.print("Toplam saniye sayısını giriniz:");
+			long totalSeconds = kb.nextLong();
+			
+			TimeUtil.printDuration(totalSeconds);
+			
+			if (totalSeconds == 0)
+				break;			
+			
+		}
+		System.out.println("Döngü sonu");
 	}
 }
 
-class Util {
-	public static void printDuration(long seconds)
-	{		
-		long hour = seconds / 3600;
-		long second = seconds % 60;
-		long minutes = seconds % 3600 / 60;
+class TimeUtil {
+	public static void printDuration(long totalSeconds)
+	{
+		long hours = totalSeconds / 3600;
+		long seconds = totalSeconds % 60;
+		long minutes = totalSeconds / 60 % 60;
 		
-		if (hour != 0)
-			System.out.printf("Saat:%d%n", hour);
+		if (hours != 0)
+			System.out.printf("%d saat ", hours);
 		
 		if (minutes != 0)
-			System.out.printf("Dakika:%d%n", minutes);
+			System.out.printf("%d dakika ", minutes);
 		
-		if (second != 0)
-			System.out.printf("Saniye:%d%n", second);			
-	}	
+		if (seconds != 0)
+			System.out.printf("%d saniye ", seconds);
+		
+		System.out.println();				
+	}
 }
