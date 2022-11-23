@@ -3,40 +3,43 @@ package csd;
 class App {
 	public static void main(String [] args)
 	{
-		GoldbachTest.run();				
+		PrintGoldbachApp.run();
 	}
 }
 
-class GoldbachTest {
+class PrintGoldbachApp {
 	public static void run()
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
 		
 		for (;;) {
 			System.out.print("2'den büyük bir çift sayı giriniz:");
-			int val = kb.nextInt();
+			int val = kb.nextInt();			
 			
-			if (val <= 2 && val % 2 != 0)
-				return;
+			if (val == 0)
+				break;
 			
-			NumberUtil.goldBach(val);
-		}
-	}
+			if (val <= 3 || val % 2 != 0) {
+				System.out.println("2'den büyük bir çift sayı girmelisiniz");
+				continue;
+			}
+				
+			NumberUtil.printGoldbach(val);			
+		}		
+	}	
 }
 
-class NumberUtil {	
-	public static void goldBach(int val)
+class NumberUtil {
+	public static void printGoldbach(int val)
 	{
-		int temp = val;
-		val /= 2;
-		
-		while (!isPrime(val)) {
-			++val;
-		}
-		
-		System.out.printf("%d + %d = %d%n", val, temp - val, temp);
-		
+		for (int a = 2; a < val; ++a) {
+			int b = val - a;
+			
+			if (isPrime(a) && isPrime(b) && a <= b)
+				System.out.printf("%d + %d = %d == %d%n", a, b, a + b, val);
+		}		
 	}
+	
 	public static boolean isPrime(long val)
 	{
 		if (val <= 1)
@@ -61,3 +64,4 @@ class NumberUtil {
 		return true;
 	}
 }
+
