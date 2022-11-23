@@ -3,58 +3,47 @@ package csd;
 class App {
 	public static void main(String [] args)
 	{
-		PrintTriangleTest.run();				
+		PrintDiamondApp.run();
 	}
 }
 
-class PrintTriangleTest {
+class PrintDiamondApp {
+	public static void printAbove(int n)
+	{
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < n - i; ++j) 
+				System.out.print(' ');			
+		
+			for (int j = 0; j < 2 * i - 1; ++j) 
+				System.out.print('*');	
+			
+			System.out.println();
+		}	
+	}
+	
+	public static void printBelow(int n)
+	{
+		for (int i = 0; i < n; ++i) {
+			for (int j = 0; j < i; ++j) 
+				System.out.print(' ');			
+		
+			for (int j = 0; j < 2 * (n - i) - 1; ++j) 
+				System.out.print('*');	
+			
+			System.out.println();
+		}			
+	}
+	
+	public static void printDiamond(int n)
+	{
+		printAbove(n);
+		printBelow(n);		
+	}	
+	
 	public static void run()
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
-		
-		for (;;) {
-			System.out.print("Bir sayı giriniz:");
-			int val = kb.nextInt();
-			
-			if (val <= 0)
-				return;
-			
-			NumberUtil.printTriangle(val);
-		}
+		System.out.print("Bir sayı giriniz:");
+		printDiamond(kb.nextInt());		
 	}
 }
-
-class NumberUtil {	
-	public static void printTriangle(int val)
-	{
-		for (int i = 1; i <= val; ++i)
-			printLine(val, i);
-		
-		for (int i = val - 1; i >= 1; --i)
-			printReverseLine(i, val);
-		
-	}
-	public static void printLine(int val, int step)
-	{
-		for (int i = 0; i < val - step; ++i)
-			System.out.print(' ');
-		
-		for (int i = 0; i < step * 2 - 1; ++i)
-			System.out.print('*');
-		
-		System.out.println();
-	}
-	public static void printReverseLine(int val, int total)
-	{
-		for (int i = val; i < total; ++i)
-			System.out.print(' ');
-		
-		for (int i = 0; i < val * 2 - 1; ++i)
-			System.out.print('*');
-		
-		System.out.println();
-	}
-}
-
-
-
